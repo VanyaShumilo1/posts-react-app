@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#root {
+    display: flex;
+    justify-content: center;
+}
+
+.App {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 800px;
+}
+
+.post {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid teal;
+    padding: 10px;
+}
+
+.posts {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+}
