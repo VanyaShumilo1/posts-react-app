@@ -4,6 +4,7 @@ import PostList from "./components/PostList";
 import MyButton from "./components/UI/buttons/MyButton";
 import MyInput from "./components/UI/inputs/MyInput";
 import PostForm from "./components/PostForm";
+import MySelect from "./components/UI/select/MySelect";
 
 
 function App() {
@@ -39,6 +40,15 @@ function App() {
             <PostForm createPost={createPost}/>
 
             <div className="line"></div>
+
+            <MySelect
+                defaultValue={"Sort by"}
+                options={[
+                    {value: 'title', name: 'Title'},
+                    {value: 'body', name: 'Description'},
+                ]}
+
+            />
 
             {
                 posts.length !== 0
