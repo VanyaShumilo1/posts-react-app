@@ -39,12 +39,6 @@ function App() {
             <PostForm createPost={createPost}/>
 
             <div className="line"></div>
-            <div>
-                <select>
-                    <option value="value1">Name</option>
-                    <option value="value2">Description</option>
-                </select>
-            </div>
 
             {
                 posts.length !== 0
