@@ -5,6 +5,18 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+* {
+    color: white;
+}
+
+select, option {
+    color: black;
+}
+
+body {
+    background: #343434;
+}
+
 #root {
     display: flex;
     justify-content: center;

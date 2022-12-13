@@ -35,6 +35,13 @@ function App() {
         setPosts(posts.filter(p => p.id !== post.id))
     }
 
+    const [selectedSort, setSelectedSort] = useState('')
+
+    const sortPosts = (sort) => {
+        setSelectedSort(sort);
+        setPosts([...posts].sort((a, b) => a[sort].localeCompare(b[sort])))
+    }
+
     return (
         <div className="App">
             <PostForm createPost={createPost}/>
@@ -42,6 +49,8 @@ function App() {
             <div className="line"></div>
 
             <MySelect
+                value={selectedSort}
+                onChange={sortPosts}
                 defaultValue={"Sort by"}
                 options={[
                     {value: 'title', name: 'Title'},
