@@ -5,6 +5,7 @@ import MyButton from "./components/UI/buttons/MyButton";
 import MyInput from "./components/UI/inputs/MyInput";
 import PostForm from "./components/PostForm";
 import MySelect from "./components/UI/select/MySelect";
+import PostFilter from "./components/PostFilter";
 
 
 function App() {
@@ -45,51 +46,32 @@ function App() {
         setPosts(posts.filter(p => p.id !== post.id))
     }
 
-    const [selectedSort, setSelectedSort] = useState('')
-    const [searchQuery, setSearchQuery] = useState('')
+    const [filter, setFilter] = useState({sort: '', query: ''})
 
     const sortedPosts = useMemo(() => {
         console.log('called')
-        if (selectedSort) {
-            return [...posts].sort((a, b) => a[selectedSort].localeCompare(b[selectedSort]))
+        if (filter.sort) {
+            return [...posts].sort((a, b) => a[filter.sort].localeCompare(b[filter.sort]))
         }
         return posts
-    }, [selectedSort, posts])
+    }, [filter.sort, posts])
 
     const sortedAndSearchedPosts = useMemo(() => {
-        return sortedPosts.filter(post => post.title.toLowerCase().includes(searchQuery.toLowerCase()))
-    }, [searchQuery, sortedPosts])
-
-    const sortPosts = (sort) => {
-        setSelectedSort(sort);
-    }
+        return sortedPosts.filter(post => post.title.toLowerCase().includes(filter.query.toLowerCase()))
+    }, [filter.query, sortedPosts])
 
     return (
         <div className="App">
             <PostForm createPost={createPost}/>
 
             <div className="line"></div>
-            <MyInput
-                value={searchQuery}
-                onChange={e => setSearchQuery(e.target.value)}
-                placeholder={"Search..."}
+
+            <PostFilter
+                filter={filter}
+                setFilter={setFilter}
             />
-
-            <MySelect
-                value={selectedSort}
-                onChange={sortPosts}
-                defaultValue={"Sort by"}
-                options={[
-                    {value: 'title', name: 'Title'},
-                    {value: 'body', name: 'Description'},
-                ]}
-
-            />
-
             {
-                sortedAndSearchedPosts.length !== 0
-                    ? <PostList removePost={removePost} posts={sortedAndSearchedPosts} title={"Posts list about js"}/>
-                    : <h1 style={{textAlign: 'center'}}>Posts not found :(</h1>
+                <PostList removePost={removePost} posts={sortedAndSearchedPosts} title={"Posts list about js"}/>
             }
 
 
