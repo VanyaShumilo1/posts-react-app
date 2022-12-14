@@ -5,17 +5,17 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-* {
-    color: white;
-}
+/** {*/
+/*    color: white;*/
+/*}*/
 
-select, option {
-    color: black;
-}
+/*select, option {*/
+/*    color: black;*/
+/*}*/
 
-body {
-    background: #343434;
-}
+/*body {*/
+/*    background: #343434;*/
+/*}*/
 
 #root {
     display: flex;
@@ -24,9 +24,9 @@ body {
 
 .App {
     margin-top: 50px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+    /*display: flex;*/
+    /*justify-content: center;*/
+    /*flex-direction: column;*/
     width: 800px;
 }
 
