@@ -13,9 +13,9 @@
 /*    color: black;*/
 /*}*/
 
-/*body {*/
-/*    background: #343434;*/
-/*}*/
+body {
+    transition: 0.3s all;
+}
 
 .dark {
     color: #fff;
@@ -91,4 +91,10 @@
 
 .toggleDarkMode input, .toggleDarkMode label {
     display: block;
+}
+
+.centerLoader {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
 }
