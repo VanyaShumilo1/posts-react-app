@@ -17,16 +17,25 @@
 /*    background: #343434;*/
 /*}*/
 
+.dark {
+    color: #fff;
+    background: #343434;
+}
+
 #root {
     display: flex;
     justify-content: center;
 }
 
 .App {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.AppWrapper {
     margin-top: 50px;
-    /*display: flex;*/
-    /*justify-content: center;*/
-    /*flex-direction: column;*/
     width: 800px;
 }
 
@@ -56,16 +65,30 @@
     opacity: 0;
     transform: translateX(350px);
 }
+
 .post-enter-active {
     opacity: 1;
     transition: all 0.5s;
     transform: translateX(0px);
 }
+
 .post-exit {
     opacity: 1;
 }
+
 .post-exit-active {
     transition: all 0.5s;
     transform: translateX(350px);
     opacity: 0;
+}
+
+.toggleDarkMode {
+    margin: 15px 0;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.toggleDarkMode input, .toggleDarkMode label {
+    display: block;
 }
