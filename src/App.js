@@ -5,9 +5,12 @@ import MyButton from "./components/UI/buttons/MyButton";
 import PostForm from "./components/PostForm";
 import PostFilter from "./components/PostFilter";
 import MyModal from "./components/UI/MyModal/MyModal";
-import {useSortedPosts} from "./components/hooks/usePosts";
+import {usePosts, useSortedPosts} from "./hooks/usePosts";
 import PostService from "./API/PostService";
 import Loader from "./components/UI/Loader/Loader";
+import {useFetching} from "./hooks/useFetching";
+import {getPagesArray, getPagesCount} from "./utils/pages";
+import Paginations from "./components/UI/pagination/Paginations";
 
 
 function App() {
@@ -17,34 +20,41 @@ function App() {
         setPosts(posts.filter(p => p.id !== post.id))
     }
     const [filter, setFilter] = useState({sort: '', query: ''})
-    const sortedAndSearchedPosts = useSortedPosts(posts, filter.sort, filter.query)
     const [modalVisible, setModalVisible] = useState(false)
-    const [isPostsLoading, setIsPostsLoading] = useState(false)
+    const [totalPages, setTotalPages] = useState(0)
+    const [limit, setLimit] = useState(10);
+    const [page, setPage] = useState(1);
+
     const createPost = (newPost) => {
         setPosts([...posts, newPost])
         setModalVisible(false)
-    }
-
-    async function fetchPosts() {
-        setIsPostsLoading(true)
-        const posts = await PostService.getAll()
-        setPosts(posts)
-        setIsPostsLoading(false)
 
     }
+
+    const [fetchPosts, isPostsLoading, postError] = useFetching(async () => {
+        const response = await PostService.getAll(limit, page)
+        setPosts(response.data)
+        const totalCount = response.headers['x-total-count']
+        setTotalPages(getPagesCount(totalCount, limit))
+    })
+
 
     useEffect(() => {
         fetchPosts()
-    }, [])
+    }, [page])
+
+    const changePage = (page) => {
+        setPage(page)
+    }
 
     const [darkMode, setDarkMode] = useState(true)
+    const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query)
 
     return (
 
         <div className={"App"}>
             <div className="AppWrapper">
                 {(darkMode) ? document.body.classList.add("dark") : document.body.classList.remove("dark")}
-                <MyButton onClick={fetchPosts}>Load posts</MyButton>
                 <MyButton onClick={() => setModalVisible(true)}>Add Post</MyButton>
                 <div className={"toggleDarkMode"}>
                     <input id={"darkMode"} name={"darkMode"} type="checkbox" checked={darkMode}
@@ -61,12 +71,23 @@ function App() {
                     filter={filter}
                     setFilter={setFilter}
                 />
+
+                {
+                    postError && <h1>Error: {postError}</h1>
+                }
+
                 {
                     isPostsLoading
                         ? <div className="centerLoader"><Loader/></div>
                         :
                         <PostList removePost={removePost} posts={sortedAndSearchedPosts} title={"Posts list about js"}/>
                 }
+
+                <Paginations
+                    page={page}
+                    totalPages={totalPages}
+                    changePage={changePage}
+                />
 
             </div>
         </div>

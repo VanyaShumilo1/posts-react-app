@@ -32,6 +32,7 @@ body {
     align-items: center;
     flex-direction: column;
     width: 100%;
+    padding-bottom: 50px;
 }
 
 .AppWrapper {
@@ -97,4 +98,15 @@ body {
     display: flex;
     justify-content: center;
     margin-top: 50px;
+}
+
+.pagesButtons {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.page__current {
+    border-color: red;
 }
