@@ -137,3 +137,8 @@ body {
     display: flex;
     gap: 10px;
 }
+
+.Login {
+    width: 1000px;
+    margin: 0 auto;
+}

@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {useFetching} from "../hooks/useFetching";
 import MyButton from "../components/UI/buttons/MyButton";
 import MyModal from "../components/UI/MyModal/MyModal";
@@ -10,6 +10,7 @@ import Paginations from "../components/UI/pagination/Paginations";
 import {usePosts} from "../hooks/usePosts";
 import {getPagesCount} from "../utils/pages";
 import PostService from "../API/PostService";
+import {AuthContext} from "../context";
 
 
 function Posts() {
